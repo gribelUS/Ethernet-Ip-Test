@@ -6,7 +6,7 @@ class PLC:
     Class to handle communication with the PLC.
     """
 
-    def __init__(self, ip_address):
+    def __init__(self):
         self.ip_address = PRT_PLC_IP_ADDRESS
         self.driver = None
 

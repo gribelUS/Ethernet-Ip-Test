@@ -6,8 +6,7 @@ from UR.URconfig import ur_ip
 rtde_io = None
 rtde_receive = None
 
-
-def ur_connection():
+def ur_connect():
     """
     Establish connection with the UR robot and returns a boolean indicating success or failure.
     """
@@ -22,7 +21,7 @@ def ur_connection():
         print("Error:", e)
         return False
     
-def read_digital_output(pin: int) -> bool:
+def read_digital_output(pin: int) -> int:
     """
     Reads the state of a digital output pin on the UR robot.
     
@@ -30,23 +29,23 @@ def read_digital_output(pin: int) -> bool:
         pin (int): The digital output pin number to read.
         
     Returns:
-        bool: The state of the digital output pin (True for high, False for low).
+        int: The state of the digital output pin (1 for high, 0 for low).
     """
     if rtde_receive and rtde_receive.isConnected():
         return rtde_receive.getDigitalOut(pin)
     else:
         raise ConnectionError("Not connected to UR robot.")
     
-def write_digital_input(pin: int, state: bool):
+def write_digital_input(pin: int, value: int):
     """
     Sets the state of a digital input pin on the UR robot.
     
     Args:
         pin (int): The digital input pin number to set.
-        state (bool): The state to set the pin to (True for high, False for low).
+        value (int): The value to set the pin to (1 for high, 0 for low).
     """
     if rtde_io and rtde_io.isConnected():
-        rtde_io.setDigitalIn(pin, state)
+        rtde_io.setDigitalIn(pin, value)
     else:
         raise ConnectionError("Not connected to UR robot.")
 
