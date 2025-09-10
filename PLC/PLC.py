@@ -1,4 +1,3 @@
-from PLC.PLCconfig import PRT_PLC_IP_ADDRESS
 from pycomm3 import LogixDriver
 
 class PLC:
@@ -7,21 +6,20 @@ class PLC:
     """
 
     def __init__(self):
-        self.ip_address = PRT_PLC_IP_ADDRESS
         self.driver = None
 
-    def connect(self):
+    def connect(self, ip_address):
         """
         Establish connection to the PLC.
         :return: True on success, False on failure
         """
         try:
-            self.driver = LogixDriver(self.ip_address)
+            self.driver = LogixDriver(ip_address)
             self.driver.open()
-            print(f"Connected to PLC at {self.ip_address}")
+            print(f"Connected to PLC at {ip_address}")
             return True
         except Exception as e:
-            print(f"Failed to connect to PLC at {self.ip_address}: {e}")
+            print(f"Failed to connect to PLC at {ip_address}: {e}")
             return False
 
     def read_tag(self, tag_name):
@@ -72,4 +70,3 @@ class PLC:
         if self.driver:
             self.driver.close()
             self.driver = None
-            print(f"Disconnected from PLC at {self.ip_address}")

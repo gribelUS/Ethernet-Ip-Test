@@ -1,5 +1,7 @@
 from PLC.PLC import PLC
+from PLC.PLCconfig import PRT_PLC_IP_ADDRESS
 from UR.UR import UR
+from UR.URconfig import ur_ip
 import time
 
 plc = PLC()
@@ -7,13 +9,13 @@ ur = UR()
 
 def main():
     # Connect to PLC
-    plc_connected = plc.connect()
+    plc_connected = plc.connect(PRT_PLC_IP_ADDRESS)
     if not plc_connected:
         print("Exiting due to PLC connection failure.")
         return
     
     # Connect to UR Robot
-    ur_connected = ur.connect()
+    ur_connected = ur.connect(ur_ip)
     if not ur_connected:
         print("Exiting due to UR robot connection failure.")
         return

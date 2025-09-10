@@ -11,18 +11,18 @@ class UR:
         self.rtde_io = None
         self.rtde_receive = None
 
-    def connect(self):
+    def connect(self, ip_address):
         """
         Establish connection with the UR robot.
         :return: True on success, False on failure
         """
         try:
-            self.rtde_io = rtde_io.RTDEIOInterface(self.ur_ip)
-            self.rtde_receive = rtde_receive.RTDEReceiveInterface(self.ur_ip)
-            print(f"Connection established with UR robot at IP: {self.ur_ip}")
+            self.rtde_io = rtde_io.RTDEIOInterface(ip_address)
+            self.rtde_receive = rtde_receive.RTDEReceiveInterface(ip_address)
+            print(f"Connection established with UR robot at IP: {ip_address}")
             return True
         except Exception as e:
-            print(f"Failed to connect to UR robot at IP: {self.ur_ip}")
+            print(f"Failed to connect to UR robot at IP: {ip_address}")
             print("Error:", e)
             return False
 
